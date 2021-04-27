@@ -1,0 +1,22 @@
+version: 1
+task_definition:
+  task_execution_role: ecsTaskExecutionRole
+  ecs_network_mode: awsvpc
+  task_size:
+    mem_limit: 0.5GB
+    cpu_limit: 256
+  services:
+    log_router:
+      firelens_configuration:
+        type: fluentbit
+        options:
+          enable-ecs-log-metadata: "true"
+run_params:
+  network_configuration:
+    awsvpc_configuration:
+      subnets:
+        - "subnet-0abcd0123abcd0123"
+        - "subnet-00123abcd0123abcd"
+      security_groups:
+        - "sg-0abcd0123abcd0123"
+      assign_public_ip: ENABLED
